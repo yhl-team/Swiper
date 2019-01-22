@@ -3,6 +3,7 @@ import random
 import requests
 from django.core.cache import cache
 
+from common import keys
 from swiper import config
 
 
@@ -21,7 +22,7 @@ def send_sms(phone, vcode):
     params['param'] = vcode
     params['mobile'] = phone
     res = requests.post(config.YZX_SMS_API, json=params)
-    print(res.text)
+    # print(res.text)
     if res.status_code == 200:
         result = res.json()
         if result['code'] == '000000':
@@ -41,8 +42,9 @@ def send_vcode(phone):
     print("vcode:", vcode)
 
     # 缓存
-    key = "VCODE-%s" % phone
+    key = keys.VCODE_KEY % phone
     cache.set(key, vcode, 180)
+    print("1:",cache.get(key))
     # 发送短信
     result = send_sms(phone, vcode)
     return result
@@ -50,5 +52,6 @@ def send_vcode(phone):
 
 # 校验短信验证码
 def check_vcode(phone, vcode):
-    cached_vcode = cache.get('VCODE-%s' % phone)
+    cached_vcode = cache.get(keys.VCODE_KEY % phone)
+    print(phone,cached_vcode,vcode)
     return cached_vcode == vcode

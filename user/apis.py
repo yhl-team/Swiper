@@ -8,11 +8,11 @@ from lib.sms import send_vcode,check_vcode
 def submit_vcode(request):
     # 发送验证码
     phone = request.GET.get('phone')
-
+    print(phone)
     # 发送验证码
     result = send_vcode(phone)
-    print('--------------------')
-    print(result)
+    # print('--------------------')
+    # print(result)
     return JsonResponse({'msg':result})
 
 

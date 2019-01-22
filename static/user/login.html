@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="{% static 'user/login.css' %}">
+</head>
+<body>
+    <h2>登录</h2>
+    <form>
+        电话  : <input type="text",id="phone" class="phone" /> <br />
+        验证码: <input type="text",id="vcode"/>
+        <input type="button" value="获取验证码" id="sendvcode"> <br />
+        <input type="button" value="登录" id="login">
+    </form>
+
+    <script src="http://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="login.js"></script>
+
+
+</body>
+</html>
